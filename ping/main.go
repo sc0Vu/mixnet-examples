@@ -47,11 +47,10 @@ func main() {
 		panic("must specify service name with -s")
 	}
 
-	_, linkKey := register(configFile)
+	cfg, linkKey := register(configFile)
 
 	// create a client and connect to the mixnet Provider
-	// TODO: Add client.NewFromConfig?
-	c, err := client.New(configFile, service)
+	c, err := client.NewFromConfig(cfg, service)
 	if err != nil {
 		panic(err)
 	}
